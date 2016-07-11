@@ -4,9 +4,15 @@
     <meta charset="utf-8" />
     <title>Color Psychology Scheme Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type='text/javascript' src='./lib/bower_components/angular/angular.js'></script>
+    <script src='schemeGeneratorController.js'></script>
   </head>
-  <body>
+  <body ng-app='colorPsychology'>
+
     <h1>Color Psychology Scheme Generator</h1>
     <h2>Choose 4 traits</h2>
+    <form ng-controller='schemeGeneratorController'>
+      <button ng-click="addColor()">Add Color</button>
+    </form>
   </body>
 </html>

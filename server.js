@@ -76,7 +76,7 @@ async.eachOf(colors, function(colorArray, color){
 });
 
 app.get('/', function(req, res) {
-  //res.render("./index");
+  res.render("./index");
   res.send("Hello, world!");
 });
 

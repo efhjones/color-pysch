@@ -69,16 +69,41 @@ async.eachOf(colors, function(colorArray, color){
           console.log("item created ", item);
         }
       });
-    } else {
-      console.log("Item already found");
     }
   });
 });
+
+//returns a randomIndex for a given array
+var randomIndex = function(array){
+  return Math.floor(Math.random() * array.length);
+}
 
 app.get('/', function(req, res) {
   res.render("./index");
   res.send("Hello, world!");
 });
+
+app.post('/', function(req, res){
+  var colorArray = req.body;
+  var returnColors= [];
+  console.log("Server says: I heard a post! req.body: ", req.body);
+  res.sendStatus(201);
+
+  async.each(colorArray, function(color){
+    Trait.findOne({ trait: color}, function(err, found){
+      if (err){
+        console.log("on color", color);
+        console.log("Bummer, error line 91 ", err);
+      }
+      if (found){
+        var index = randomIndex(found.colors);
+        returnColors.push(found.colors[index]);
+      }
+
+    });
+  });
+
+})
 
 
 //create an Express server to connect

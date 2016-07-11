@@ -5,11 +5,20 @@ angular.module('colorPsychology', [])
   console.log("Hello from Controller!");
   $scope.colors = [];
   $scope.color = "";
+  $scope.display;
   $scope.addColor = function(){
-    $scope.colors.push($scope.color);
     console.log("Pushed color " + $scope.color + " to colors : " + $scope.colors);
     if ($scope.colors.length === 4){
       $scope.submitColors();
+      $scope.display = "You chose " + $scope.colors;
+      // $scope.colors.forEach(function(color){
+      //   $scope.display += color + " ";
+      // });
+      $scope.colors = [];
+
+    } else if ($scope.colors.length < 4){
+      $scope.colors.push($scope.color);
+      console.log($scope.colors);
     }
   }
   $scope.submitColors = function(){
@@ -27,11 +36,9 @@ angular.module('colorPsychology', [])
   var submit = function(data){
     return $http({
       method: 'POST',
-      url: '/traits',
+      url: '/',
       data: data
-    }).then(function (resp){
-      resp.send('Thanks!');
-    })
+    });
   }
 
   return {

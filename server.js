@@ -23,15 +23,14 @@ app.use(express.static(__dirname + '/client'));
 
 mongoose.connect('mongodb://localhost/MVP');
 
-app.all('*', function(req, res, next) { 
-  res.header('Access-Control-Allow-Origin', '*'); 
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS'); 
-  res.header('Access-Control-Allow-Headers', 'Content-Type'); 
-  next(); 
-});
+// app.all('*', function(req, res, next) { 
+//   res.header('Access-Control-Allow-Origin', '*'); 
+//   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS'); 
+//   res.header('Access-Control-Allow-Headers', 'Content-Type'); 
+//   next(); 
+// });
 
 app.get('/', function(req, res) {
-  res.render('/');
   res.send("Hello, world!");
 });
 

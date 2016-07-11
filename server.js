@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var http = require('http');
 var bodyParser = require('body-parser');
 var colors = require('./colors.js');
+var async = require('async');
 
 //initialize the app as an express app
 var app = express();
@@ -52,38 +53,27 @@ var colorSchema = new mongoose.Schema({
 
 var Trait = mongoose.model('Trait', colorSchema);
 
-console.log("I found the colors object!" , colors);
+async.eachOf(colors, function(colorArray, color){
 
-
-// for (var trait in colors){
-//   console.log('Looped again, color is ', trait);
-
-//   Trait.findOne({ trait: '"' +  trait + '"'}, function(err, found){
-//     if (err){
-//       console.log("on color", trait);
-//       console.log("Bummer, error line 66 ", err);
-//     }
-//     if (!found){
-//       console.log("I did not find " + trait + "so I'mma create it");
-//       Trait.create({trait: trait, colors: colors[trait]}, function(err, item){
-//         if (err){
-//           console.log("Bummer, error line 71 ", err);
-//         } else {
-//           console.log("item created ", item);
-//         }
-//       });
-//     } else {
-//       console.log("Item already found");
-//     }
-//   });
-// };
-
-
-Trait.findOne({ trait: 'refreshing'}, function(err, found){
-  if (found){
-    console.log("I found that color! ", found.trait, found.colors);
-  }
-})
+  Trait.findOne({ trait: color}, function(err, found){
+    if (err){
+      console.log("on color", color);
+      console.log("Bummer, error line 66 ", err);
+    }
+    if (!found){
+      console.log("I did not find " + color + " so I'mma create it");
+      Trait.create({trait: color, colors: colorArray}, function(err, item){
+        if (err){
+          console.log("Bummer, error line 71 ", err);
+        } else {
+          console.log("item created ", item);
+        }
+      });
+    } else {
+      console.log("Item already found");
+    }
+  });
+});
 
 app.get('/', function(req, res) {
   //res.render("./index");

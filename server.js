@@ -3,6 +3,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var http = require('http');
 var bodyParser = require('body-parser');
+var colors = require('./colors.js');
 
 //initialize the app as an express app
 var app = express();
@@ -32,12 +33,60 @@ if (process.env.PORT){
 
 
 app.listen(port);
-
-
 console.log("Server is listening on " + port);
 
 
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('Connected!')
+});
+
+
+var colorSchema = new mongoose.Schema({
+  trait: String,
+  colors: Array
+});
+
+var Trait = mongoose.model('Trait', colorSchema);
+
+console.log("I found the colors object!" , colors);
+
+
+// for (var trait in colors){
+//   console.log('Looped again, color is ', trait);
+
+//   Trait.findOne({ trait: '"' +  trait + '"'}, function(err, found){
+//     if (err){
+//       console.log("on color", trait);
+//       console.log("Bummer, error line 66 ", err);
+//     }
+//     if (!found){
+//       console.log("I did not find " + trait + "so I'mma create it");
+//       Trait.create({trait: trait, colors: colors[trait]}, function(err, item){
+//         if (err){
+//           console.log("Bummer, error line 71 ", err);
+//         } else {
+//           console.log("item created ", item);
+//         }
+//       });
+//     } else {
+//       console.log("Item already found");
+//     }
+//   });
+// };
+
+
+Trait.findOne({ trait: 'refreshing'}, function(err, found){
+  if (found){
+    console.log("I found that color! ", found.trait, found.colors);
+  }
+})
+
 app.get('/', function(req, res) {
+  //res.render("./index");
   res.send("Hello, world!");
 });
 

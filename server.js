@@ -21,6 +21,8 @@ app.use(bodyParser.json());
 //express.static handles any wildcard routes
 app.use(express.static(__dirname + '/client'));
 
+var port = process.env.PORT || 3000;
+
 if (process.env.PORT){
   mongoose.connect('  mongodb://efhjones:'+ process.env.MONGO_PASS + '@ds031328.mlab.com:31328/heroku_0p4lrbhq');
 } else {
@@ -28,7 +30,7 @@ if (process.env.PORT){
   }
 
 
-var port = process.env.PORT || 3000;
+
 app.listen(port);
 
 

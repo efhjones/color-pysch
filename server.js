@@ -21,24 +21,23 @@ app.use(bodyParser.json());
 //express.static handles any wildcard routes
 app.use(express.static(__dirname + '/client'));
 
-mongoose.connect('mongodb://localhost/MVP');
+if (process.env.PORT){
+  mongoose.connect('  mongodb://efhjones:'+ process.env.MONGO_PASS + '@ds031328.mlab.com:31328/heroku_0p4lrbhq');
+} else {
+  mongoose.connect('mongodb://localhost/MVP');
+  }
 
-// app.all('*', function(req, res, next) { 
-//   res.header('Access-Control-Allow-Origin', '*'); 
-//   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS'); 
-//   res.header('Access-Control-Allow-Headers', 'Content-Type'); 
-//   next(); 
-// });
+
+var port = process.env.PORT || 3000;
+app.listen(port);
+
+
+console.log("Server is listening on " + port);
+
 
 app.get('/', function(req, res) {
   res.send("Hello, world!");
 });
-
-
-app.listen(3000);
-
-console.log("Server is listening on 3000");
-
 
 
 //create an Express server to connect

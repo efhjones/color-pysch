@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Color Psychology Scheme Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type='text/javascript' src='./lib/bower_components/jquery/dist/jquery.js'></script>
     <script type='text/javascript' src='./lib/bower_components/angular/angular.js'></script>
     <script src='schemeGeneratorController.js'></script>
   </head>
@@ -12,7 +13,91 @@
     <h1>Color Psychology Scheme Generator</h1>
     <h2>Choose 4 traits</h2>
     <form ng-controller='schemeGeneratorController'>
-      <button ng-click="addColor()">Add Color</button>
+   <label>
+    <input type="radio" ng-model="color" value="energetic">
+    Energetic
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="elegant">
+    elegant
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="expensive">
+    expensive
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="delicious">
+    delicious
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="warm">
+    warm
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="strong">
+    strong
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="powerful">
+    powerful
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="playful">
+    playful
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="vibrant">
+    vibrant
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="festive">
+    festive
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="gentle">
+    gentle
+  </label><br/>
+   <label>
+    <input type="radio" ng-model="color" value="nostalgic">
+    nostalgic
+  </label><br/>
+   <label>
+    <input type="radio" ng-model="color" value="romatic">
+    romatic
+  </label><br/>
+   <label>
+    <input type="radio" ng-model="color" value="nurturing">
+    nurturing
+  </label><br/>
+   <label>
+    <input type="radio" ng-model="color" value="fun">
+    fun
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="traditional">
+    traditional
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="happy">
+    happy
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="comfort">
+    comfort
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="fresh">
+    fresh
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="natural">
+    natural
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="refreshing">
+    refreshing
+  </label><br/>
+      <button ng-click="addColor(value)">Add Color</button>
     </form>
   </body>
 </html>

@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/client'));
 var port = process.env.PORT || 3000;
 
 if (process.env.PORT){
-  mongoose.connect('mongodb://emily:'+ process.env.MONGO_PASS + '@ds031328.mlab.com:31328/heroku_0p4lrbhq');
+  mongoose.connect('mongodb://efhjones:' + process.env.MONGO_PASS + '@ds037185.mlab.com:37185/heroku_mrslk85n');
 } else {
   mongoose.connect('mongodb://localhost/MVP');
   }

@@ -97,9 +97,9 @@ app.post('/', function(req, res){
       }
       if (found){
         var index = randomIndex(found.colors);
-        returnColors.push(found.colors[index]);
+        res.send(returnColors);
+        returnColors = [];
       }
-
     });
   });
 

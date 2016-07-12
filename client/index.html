@@ -23,7 +23,7 @@
         <h3>Choose 4 traits</h3>
       </center>
       <form ng-controller='schemeGeneratorController'>
-       <label class='option'><input type="radio" ng-model="color" value="energetic">energetic</label>
+        <label class='option'><input type="radio" ng-model="color" value="energetic">energetic</label>
         <label class='option'><input type="radio" ng-model="color" value="elegant">elegant</label>
         <label class='option'><input type="radio" ng-model="color" value="expensive">expensive</label>
         <label class='option'><input type="radio" ng-model="color" value="delicious">delicious</label>
@@ -47,6 +47,10 @@
         <button ng-click="addColor(value)" class='submit'>Add Color</button>
       </form>
     </div>
-    <div id='colors'></div>
+    <div class='colorContainer'>
+      <canvas id='colors' width="500" height="330"></canvas>
+      <div id="labels"></div>
+    </div>
+
   </body>
 </html>

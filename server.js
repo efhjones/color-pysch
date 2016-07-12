@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var http = require('http');
 var bodyParser = require('body-parser');
 var colors = require('./colors.js');
+var Promise = require('bluebird');
 var async = require('async');
 
 //initialize the app as an express app
@@ -46,12 +47,20 @@ db.once('open', function() {
 });
 
 
-var colorSchema = new mongoose.Schema({
+var traits = new mongoose.Schema({
   trait: String,
   colors: Array
 });
 
-var Trait = mongoose.model('Trait', colorSchema);
+var schemes = new mongoose.Schema({
+  colors: Array,
+  created_at: Date
+});
+
+
+var Trait = mongoose.model('Trait', traits);
+
+var Scheme = mongoose.model('Scheme', schemes);
 
 async.eachOf(colors, function(colorArray, color){
 
@@ -71,12 +80,16 @@ async.eachOf(colors, function(colorArray, color){
       });
     }
   });
+}, function(result){
+  console.log("hooray!");
 });
 
 //returns a randomIndex for a given array
 var randomIndex = function(array){
   return Math.floor(Math.random() * array.length);
 }
+
+var returnColors = [];
 
 app.get('/', function(req, res) {
   res.render("./index");
@@ -85,11 +98,11 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res){
   var colorArray = req.body;
-  var returnColors= [];
-  console.log("Server says: I heard a post! req.body: ", req.body);
   res.sendStatus(201);
 
-  async.each(colorArray, function(color){
+  console.log("Server says: I heard a post! req.body: ", req.body);
+
+  async.each(colorArray, function(color, hello){
     Trait.findOne({ trait: color}, function(err, found){
       if (err){
         console.log("on color", color);
@@ -97,14 +110,35 @@ app.post('/', function(req, res){
       }
       if (found){
         var index = randomIndex(found.colors);
-        res.send(returnColors);
-        returnColors = [];
+        returnColors.push(found.colors[index]);
       }
     });
   });
 
+  returnColors = [];
+
+  Scheme.findOne({ colors: returnColors }, function(err, found){
+    if (err){
+      console.log("Err, line 188" , err);
+    }
+    if (!found){
+      Scheme.create({ colors: returnColors, created_at : new Date() }, function(err, scheme){
+        if (!err){
+          console.log("Scheme created! ", scheme);
+        }
+      })
+    }
+  })
+});
+
+app.get('/scheme', function(req, res){
+  Scheme.findOne({}).sort('-date').exec(function(err, result){
+    res.send(result);
+  })
 })
 
+
+module.exports.returnColors = returnColors;
 
 //create an Express server to connect
 //our front end to the MongoDB database

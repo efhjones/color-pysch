@@ -20,6 +20,7 @@ angular.module('colorPsychology', [])
   $scope.submitColors = function(){
       ChooseColors.submit($scope.colors)
         .then(function(object){
+          $scope.clear();
           $scope.makeColorDiv(object.data.colors);
       });
     }
@@ -27,13 +28,27 @@ angular.module('colorPsychology', [])
   }
   $scope.makeColorDiv = function(colorArray){
     $scope.scheme = colorArray;
-    var newDirective = angular.element('<div ng-repeat="color in scheme track by $index" style="background-color: {{ color }}" class="color">{{ color }}</div><button class="submit" ng-click="clear()">Clear</button>');
-    angular.element(document.querySelector('#colors')).append(newDirective);
+    var canvas = document.getElementById("colors");
+    var ctx = canvas.getContext("2d");
+    for (var i = 0; i < colorArray.length; i++){
+      console.log('logging color', colorArray[i]);
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = colorArray[i];
+                  //x, y, width, height
+      ctx.fillRect(i*70,20,50,330);
+    }
+    var newDirective = angular.element('<div class="label" ng-repeat="color in scheme track by $index">{{ color }}</div>');
+    angular.element(document.querySelector('.labels')).append(newDirective);
     $compile(newDirective)($scope);
+
+    // var newDirective = angular.element('<div ng-repeat="color in scheme track by $index" style="background-color: {{ color }}" class="color">{{ color }}</div><button class="submit" ng-click="clear()">Clear</button>');
+    // angular.element(document.querySelector('#colors')).append(newDirective);
+    // $compile(newDirective)($scope);
   }
 
   $scope.clear = function(){
-    angular.element('#colors').html('');
+    angular.element('.colorContainer').html('<canvas id="colors"></canvas>');
+    angular.element('.labels').html('');
   }
 })
 

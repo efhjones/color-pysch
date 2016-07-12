@@ -5,27 +5,33 @@ angular.module('colorPsychology', [])
   $scope.colors = [];
   $scope.color = "";
   $scope.scheme = false;
+  $scope.canvas;
   $scope.addColor = function(){
-  if ($scope.colors.length < 4){
-    if($scope.color.length > 1){
-      $scope.colors.push($scope.color);
-      console.log($scope.colors);
+    if ($scope.colors.length < 4){
+      if($scope.color.length > 1){
+        $scope.colors.push($scope.color);
+        console.log($scope.colors);
+      }
     }
-    }
-  if ($scope.colors.length === 4){
+    if ($scope.colors.length === 4){
       $scope.submitColors();
       $scope.display = "You chose " + $scope.colors.toString();
       $scope.colors = [];
     }
-  $scope.submitColors = function(){
+    if ($scope.colors.length === 1){
+      $scope.clear();
+    }
+
+
+  }
+   $scope.submitColors = function(){
+    $scope.clear();
       ChooseColors.submit($scope.colors)
         .then(function(object){
-          $scope.clear();
           $scope.makeColorDiv(object.data.colors);
       });
     }
 
-  }
   $scope.makeColorDiv = function(colorArray){
     $scope.scheme = colorArray;
     var canvas = document.getElementById("colors");
@@ -35,9 +41,10 @@ angular.module('colorPsychology', [])
       var ctx = canvas.getContext("2d");
       ctx.fillStyle = colorArray[i];
                   //x, y, width, height
-      ctx.fillRect(i*70,20,50,330);
+      ctx.fillRect(i*70,0,50,300);
     }
-    var newDirective = angular.element('<div class="label" ng-repeat="color in scheme track by $index">{{ color }}</div>');
+    $scope.canvas = canvas;
+    var newDirective = angular.element('<div class="label" ng-repeat="color in scheme track by $index">{{ color }}</div><button class="submit" ng-click="save()">Save</button>');
     angular.element(document.querySelector('.labels')).append(newDirective);
     $compile(newDirective)($scope);
 
@@ -50,6 +57,13 @@ angular.module('colorPsychology', [])
     angular.element('.colorContainer').html('<canvas id="colors"></canvas>');
     angular.element('.labels').html('');
   }
+  $scope.save = function(){
+    console.log('save clicked');
+    var img = $scope.canvas.toDataURL("image/png");
+    console.log("Image saved, ", img);
+    document.write('<img src="'+img+'"/>');
+  }
+
 })
 
 .factory('ChooseColors', function($http){

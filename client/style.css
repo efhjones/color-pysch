@@ -1,4 +1,7 @@
 
+div {
+  border: 1px solid white;
+}
 h1 {
   font-family: 'Slabo 27px', serif;
   font-size: 5em;
@@ -38,6 +41,11 @@ h2 {
   display: inline;
 }
 
+.labels {
+  width: 45%;
+  float: right;
+}
+
 .label {
   display: inline;
   font-family :'Roboto';
@@ -65,7 +73,8 @@ h2 {
   background-color: white;
   border: 1px solid darkgrey;
   border-radius: 10px;
-  width: 100%;
-  clear: both;
+  width: 80%;
+  margin: auto 0;
 }
+
 

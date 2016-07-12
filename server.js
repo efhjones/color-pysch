@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var colors = require('./colors.js');
 var Promise = require('bluebird');
 var async = require('async');
+var fs = require('fs');
+
 
 
 //*************************************************************************
@@ -156,5 +158,5 @@ app.post('/', function(req, res){
 //*************************************************************************
 //                              EXPORTS
 //*************************************************************************
-
+module.exports.fs = fs;
 module.exports = app;

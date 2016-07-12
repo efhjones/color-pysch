@@ -120,7 +120,7 @@ app.get('/scheme', function(req, res){
 //*************************************************************************
 
 app.post('/', function(req, res){
-
+  console.log("Server heard post");
   var colorArray = req.body;
   res.sendStatus(201);
 

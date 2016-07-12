@@ -1,4 +1,7 @@
-//require the modules that we need
+//*************************************************************************
+//                              REQUIREMENTS
+//*************************************************************************
+
 var express = require('express');
 var mongoose = require('mongoose');
 var http = require('http');
@@ -7,21 +10,15 @@ var colors = require('./colors.js');
 var Promise = require('bluebird');
 var async = require('async');
 
-//initialize the app as an express app
+
+//*************************************************************************
+//                              SERVER
+//*************************************************************************
+
 var app = express();
 
-//attaches bodyParser to our app. Parses requests so we don't have to
-//.json specifies type of files we want
 app.use(bodyParser.json());
 
-//renders homepage
-//Plug in folder
-//If we are asked for any files, it will look here (express.static)
-
-//app.use adds middleware to the app stack
-//handles all requests in order
-
-//express.static handles any wildcard routes
 app.use(express.static(__dirname + '/client'));
 
 var port = process.env.PORT || 3000;
@@ -32,8 +29,6 @@ if (process.env.PORT){
   mongoose.connect('mongodb://localhost/MVP');
   }
 
-
-
 app.listen(port);
 console.log("Server is listening on " + port);
 
@@ -42,10 +37,12 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  // we're connected!
   console.log('Connected!')
 });
 
+//*************************************************************************
+//                            SCHEMAS
+//*************************************************************************
 
 var traits = new mongoose.Schema({
   trait: String,
@@ -57,10 +54,18 @@ var schemes = new mongoose.Schema({
   created_at: Date
 });
 
+//*************************************************************************
+//                            MODELS
+//*************************************************************************
 
 var Trait = mongoose.model('Trait', traits);
 
 var Scheme = mongoose.model('Scheme', schemes);
+
+
+//*************************************************************************
+//                       GENERATE COLOR DB
+//*************************************************************************
 
 async.eachOf(colors, function(colorArray, color){
 
@@ -80,33 +85,49 @@ async.eachOf(colors, function(colorArray, color){
       });
     }
   });
-}, function(result){
-  console.log("hooray!");
 });
 
-//returns a randomIndex for a given array
+//*************************************************************************
+//                        RANDOM INDEX GENERATOR
+//*************************************************************************
 var randomIndex = function(array){
   return Math.floor(Math.random() * array.length);
 }
 
+
 var returnColors = [];
 
+//*************************************************************************
+//                            GET REQUESTS
+//*************************************************************************
+
+//RENDERS INDEX
 app.get('/', function(req, res) {
   res.render("./index");
   res.send("Hello, world!");
 });
 
+
+//GRABS NEWEST SCHEMA
+app.get('/scheme', function(req, res){
+  Scheme.find().sort('-created_at').exec(function(err, result){
+    res.send(result[0]);
+  })
+});
+
+//*************************************************************************
+//      POST REQUEST --> CHOOSES COLORS, CREATES SCHEMA MODEL
+//*************************************************************************
+
 app.post('/', function(req, res){
+
   var colorArray = req.body;
   res.sendStatus(201);
 
-  console.log("Server says: I heard a post! req.body: ", req.body);
-
-  async.each(colorArray, function(color, hello){
+  async.each(colorArray, function(color){
     Trait.findOne({ trait: color}, function(err, found){
       if (err){
-        console.log("on color", color);
-        console.log("Bummer, error line 91 ", err);
+        console.log("Err", err);
       }
       if (found){
         var index = randomIndex(found.colors);
@@ -119,7 +140,7 @@ app.post('/', function(req, res){
 
   Scheme.findOne({ colors: returnColors }, function(err, found){
     if (err){
-      console.log("Err, line 188" , err);
+      console.log("Err", err);
     }
     if (!found){
       Scheme.create({ colors: returnColors, created_at : new Date() }, function(err, scheme){
@@ -131,35 +152,8 @@ app.post('/', function(req, res){
   })
 });
 
-app.get('/scheme', function(req, res){
-  Scheme.find().sort('-created_at').exec(function(err, result){
-    console.log("This should be the newest scheme...", result[0]);
-    res.send(result[0]);
-  })
-})
-
-
-module.exports.returnColors = returnColors;
-
-//create an Express server to connect
-//our front end to the MongoDB database
-
-//to run the server, go to terminal and say mongod
-
-/*
-
-Terminal:
-  npm install --save mongoose
-  npm install --save nodemon
-  npm install --save body-parser
-
-  babel compile : babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline --watch
-
-
-*/
-
-
-
-
+//*************************************************************************
+//                              EXPORTS
+//*************************************************************************
 
 module.exports = app;

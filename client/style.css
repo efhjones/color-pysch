@@ -1,0 +1,51 @@
+h1 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 5em;
+  margin: 0 auto;
+}
+
+h2 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 3em;
+  margin: 0 auto;
+
+}
+
+.header {
+  margin: 0 auto;
+  width: 50%;
+}
+
+#colors {
+  width: 45%;
+  height: 300px;
+  display: inline;
+  float: right;
+}
+
+.color{
+  display: block;
+  float: right;
+  width: 20%;
+  height: 350px;
+  margin: 5px;
+}
+
+.options {
+  font-family: 'Roboto';
+  width: 45%;
+  display: inline;
+  float: left;
+}
+
+.option {
+  width: 25%;
+  display: block;
+  float: left;
+  margin: 10px;
+}
+
+.submit {
+  width: 100%;
+  clear: both;
+}

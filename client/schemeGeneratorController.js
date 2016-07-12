@@ -5,7 +5,6 @@ angular.module('colorPsychology', [])
   $scope.colors = [];
   $scope.color = "";
   $scope.scheme = false;
-  $scope.display = "color"
   $scope.addColor = function(){
   if ($scope.colors.length < 4){
     if($scope.color.length > 1){
@@ -28,30 +27,13 @@ angular.module('colorPsychology', [])
   }
   $scope.makeColorDiv = function(colorArray){
     $scope.scheme = colorArray;
-    var canvas = document.getElementById("colors");
-    var ctx = canvas.getContext("2d");
-    for (var i = 0; i < colorArray.length; i++){
-      var ctx = canvas.getContext("2d");
-      ctx.fillStyle = colorArray[i];
-                  //x, y, width, height
-      ctx.fillRect(i*110,20,90,330);
-    }
-    var newDirective = angular.element('<div ng-repeat="color in scheme track by $index" class="label">{{color}}</div>');
-
-
-    angular.element(document.querySelector('#labels')).append(newDirective);
+    var newDirective = angular.element('<div ng-repeat="color in scheme track by $index" style="background-color: {{ color }}" class="color">{{ color }}</div><button class="submit" ng-click="clear()">Clear</button>');
+    angular.element(document.querySelector('#colors')).append(newDirective);
     $compile(newDirective)($scope);
   }
 
   $scope.clear = function(){
     angular.element('#colors').html('');
-  }
-  $scope.saveScheme = function(){
-    html2canvas(element, {
-      onrendered: function(canvas){
-        console.log(canvas);
-      }
-    });
   }
 })
 

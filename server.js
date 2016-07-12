@@ -132,8 +132,9 @@ app.post('/', function(req, res){
 });
 
 app.get('/scheme', function(req, res){
-  Scheme.findOne({}).sort('-date').exec(function(err, result){
-    res.send(result);
+  Scheme.find().sort('-created_at').exec(function(err, result){
+    console.log("This should be the newest scheme...", result[0]);
+    res.send(result[0]);
   })
 })
 

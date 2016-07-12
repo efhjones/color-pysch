@@ -12,7 +12,9 @@
 
     <h1>Color Psychology Scheme Generator</h1>
     <h2>Choose 4 traits</h2>
-    <div>{{ display }}</div>
+    <ul model='test'>
+    <li ng-controller='schemeGeneratorController' ng-repeat="number in test">Number: {{number}}</li>
+    </ul>
     <form ng-controller='schemeGeneratorController'>
    <label>
     <input type="radio" ng-model="color" value="energetic">

@@ -130,6 +130,7 @@ app.post('/', function(req, res){
         console.log("Err", err);
       }
       if (found){
+        console.log('found the colors', found.colors);
         var index = randomIndex(found.colors);
         returnColors.push(found.colors[index]);
       }

@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/client'));
 var port = process.env.PORT || 3000;
 
 if (process.env.PORT){
-  mongoose.connect('mongodb://efhjones:' + process.env.MONGO_PASS + '@ds037185.mlab.com:37185/heroku_mrslk85n');
+  mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds055485.mlab.com:55485/heroku_lcz34t7g');
 } else {
   mongoose.connect('mongodb://localhost/MVP');
   }
@@ -86,6 +86,11 @@ async.eachOf(colors, function(colorArray, color){
         }
       });
     }
+    if (found && found.colors.length !== colorArray.length){
+      console.log("Updating colors on: ", found.trait);
+      found.colors = colorArray;
+      console.log("Updated color arry. ", found.trait, ' is now ', found.colors);
+    }
   });
 });
 
@@ -93,10 +98,9 @@ async.eachOf(colors, function(colorArray, color){
 //                        RANDOM INDEX GENERATOR
 //*************************************************************************
 var randomIndex = function(array){
+  console.log("generating random color");
   return Math.floor(Math.random() * array.length);
 }
-
-
 var returnColors = [];
 
 //*************************************************************************
@@ -105,6 +109,7 @@ var returnColors = [];
 
 //RENDERS INDEX
 app.get('/', function(req, res) {
+  console.log("Get request");
   res.render("./index");
   res.send("Hello, world!");
 });
@@ -122,7 +127,7 @@ app.get('/scheme', function(req, res){
 //*************************************************************************
 
 app.post('/', function(req, res){
-  console.log("Server heard post");
+  console.log("Spongebob");
   var colorArray = req.body;
   res.sendStatus(201);
 
@@ -132,8 +137,11 @@ app.post('/', function(req, res){
         console.log("Err", err);
       }
       if (found){
-        console.log('found the colors', found.colors);
+        console.log('WTF', found.colors);
+        console.log("helooo");
+
         var index = randomIndex(found.colors);
+        console.log("chose index", index);
         returnColors.push(found.colors[index]);
       }
     });
@@ -142,10 +150,12 @@ app.post('/', function(req, res){
   returnColors = [];
 
   Scheme.findOne({ colors: returnColors }, function(err, found){
+    console.log("Hello")
     if (err){
       console.log("Err", err);
     }
     if (!found){
+      console.log("Scheme not found!");
       Scheme.create({ colors: returnColors, created_at : new Date() }, function(err, scheme){
         if (!err){
           console.log("Scheme created! ", scheme);

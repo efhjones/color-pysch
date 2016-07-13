@@ -6,7 +6,10 @@ angular.module('colorPsychology', [])
   $scope.color = "";
   $scope.scheme = false;
   $scope.canvas;
-  $scope.addColor = function(){
+  $scope.addColor = function(color){
+    if (color){
+      console.log(color);
+    }
     if ($scope.colors.length < 4){
       if($scope.color.length > 1){
         $scope.colors.push($scope.color);
@@ -21,13 +24,12 @@ angular.module('colorPsychology', [])
     if ($scope.colors.length === 1){
       $scope.clear();
     }
-
-
   }
    $scope.submitColors = function(){
     $scope.clear();
       ChooseColors.submit($scope.colors)
         .then(function(object){
+          console.log("submit colors received", object.data);
           $scope.makeColorDiv(object.data.colors);
       });
     }
@@ -59,9 +61,15 @@ angular.module('colorPsychology', [])
   }
   $scope.save = function(){
     console.log('save clicked');
-    var img = $scope.canvas.toDataURL("image/png");
-    console.log("Image saved, ", img);
-    document.write('<img src="'+img+'"/>');
+    var imgSrc = $scope.canvas.toDataURL("image/png");
+    angular.element(document.querySelector('.colorContainer')).append('<a href="' + imgSrc + '" download=scheme.jpg');
+    var url = imgSrc.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    window.open(url)
+    console.log("Image saved, ", imgSrc);
+
+  }
+  $scope.hello = function (value) {
+    console.log(value);
   }
 
 })

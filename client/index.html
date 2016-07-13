@@ -23,6 +23,7 @@
         <h3>Choose 4 traits</h3>
       </center>
       <div ng-controller='schemeGeneratorController' class="selections">
+        <label class='option'><input type="radio" ng-model="color" value="authoritative"  ng-click='addColor(value)'>authoritative</label>
         <label class='option'><input type="radio" ng-model="color" value="energetic"  ng-click='addColor(value)'>energetic</label>
         <label class='option'><input type="radio" ng-model="color" value="elegant" ng-click='addColor(value)'>elegant</label>
         <label class='option'><input type="radio" ng-model="color" value="expensive" ng-click='addColor(value)'>expensive</label>
@@ -36,7 +37,6 @@
         <label class='option'><input type="radio" ng-model="color" value="gentle" ng-click='addColor(value)'>gentle</label>
         <label class='option'><input type="radio" ng-model="color" value="nostalgic" ng-click='addColor(value)'>nostalgic</label>
         <label class='option'><input type="radio" ng-model="color" value="romatic" ng-click='addColor(value)'>romatic</label>
-        <label class='option'><input type="radio" ng-model="color" value="nurturing" ng-click='addColor(value)'>nurturing</label>
         <label class='option'><input type="radio" ng-model="color" value="fun" ng-click='addColor(value)'>fun</label>
         <label class='option'><input type="radio" ng-model="color" value="traditional" ng-click='addColor(value)'>traditional</label>
         <label class='option'><input type="radio" ng-model="color" value="happy" ng-click='addColor(value)'>happy</label>

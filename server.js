@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/client'));
 var port = process.env.PORT || 3000;
 
 if (process.env.PORT){
-  mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds055485.mlab.com:55485/heroku_lcz34t7g');
+  mongoose.connect('mongodb://efhjones:' + process.env.MONGO_PASS + '@ds037185.mlab.com:37185/heroku_mrslk85n');
 } else {
   mongoose.connect('mongodb://localhost/MVP');
   }

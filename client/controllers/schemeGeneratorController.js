@@ -1,17 +1,23 @@
-angular.module('colorPsychology', [])
-
+angular.module('colorPsych.controllers', [])
 
 .controller('schemeGeneratorController', function ($scope, $compile, $http, $window, ChooseColors){
+  $scope.options = ["authoritative", "energetic", "elegant", "expensive", "delicious",
+                     "warm", "strong", "powerful", "playful", "vibrant", "festive", "gentle", 
+                     "nostalgic", "romatic", "fun", "traditional", "happy", "comfort", "fresh", 
+                     "natural", "refreshing"];
+
   $scope.colors = [];
+  $scope.chosen = [];
   $scope.color = "";
   $scope.scheme = false;
   $scope.canvas;
   $scope.addColor = function(color){
     if (color){
-      console.log(color);
+      console.log("yo I'm adding", color, 'colors:',  $scope.colors);
     }
     if ($scope.colors.length < 4){
       if($scope.color.length > 1){
+        console.log("entered if block");
         $scope.colors.push($scope.color);
         console.log($scope.colors);
       }
@@ -22,17 +28,19 @@ angular.module('colorPsychology', [])
       $scope.colors = [];
     }
     if ($scope.colors.length === 1){
+      console.log('scope colors length', $scope.colors.length);
       $scope.clear();
     }
   }
-   $scope.submitColors = function(){
-    $scope.clear();
-      ChooseColors.submit($scope.colors)
-        .then(function(object){
-          console.log("submit colors received", object.data);
-          $scope.makeColorDiv(object.data.colors);
-      });
-    }
+
+ $scope.submitColors = function(){
+  $scope.clear();
+    ChooseColors.submit($scope.colors)
+      .then(function(object){
+        console.log("submit colors received", object.data);
+        $scope.makeColorDiv(object.data.colors);
+    });
+  }
 
   $scope.makeColorDiv = function(colorArray){
     $scope.scheme = colorArray;
@@ -54,7 +62,6 @@ angular.module('colorPsychology', [])
     // angular.element(document.querySelector('#colors')).append(newDirective);
     // $compile(newDirective)($scope);
   }
-
   $scope.clear = function(){
     angular.element('.colorContainer').html('<canvas id="colors"></canvas>');
     angular.element('.labels').html('');
@@ -73,26 +80,3 @@ angular.module('colorPsychology', [])
   }
 
 })
-
-.factory('ChooseColors', function($http){
-
-  var submit = function(data){
-    return $http({
-      method: 'POST',
-      url: '/',
-      data: data
-    })
-    .then(function(){
-      var request = $http({
-        method: 'GET',
-        url: '/scheme'
-      });
-      return request;
-    });
-  }
-
-  return {
-    submit: submit
-  }
-
-});

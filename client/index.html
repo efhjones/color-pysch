@@ -26,8 +26,8 @@
       </center>
       <div ng-controller='schemeGeneratorController' class="selections">
         <div class='options'>
-          <div ng-repeat="option in options">
-              <h5 ng-click='addColor(option)'>{{option}}</h5>
+          <div ng-repeat="option in options track by $index">
+              <h5 ng-click='addColor(option, $index)'>{{option}}</h5>
           </div>
         </div>
         <div class='chosen'>Moods:

@@ -9,9 +9,11 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type='text/javascript' src='./lib/bower_components/jquery/dist/jquery.js'></script>
     <script type='text/javascript' src='./lib/bower_components/angular/angular.js'></script>
-    <script src='schemeGeneratorController.js'></script>
+    <script src='controllers/schemeGeneratorController.js'></script>
+    <script src='services/schemeGeneratorFactory.js'></script>
+    <script src='app.js'></script>
   </head>
-  <body ng-app='colorPsychology' ng-controller='schemeGeneratorController'>
+  <body ng-app='colorPsych' ng-controller='schemeGeneratorController'>
     <div class='header'>
       <center>
         <h1>Color Psych<i class='fa fa-search' style='font-size:50px'></i>logy</h1>
@@ -23,8 +25,13 @@
         <h3>Choose 4 traits</h3>
       </center>
       <div ng-controller='schemeGeneratorController' class="selections">
+        <ul>
+          <li ng-repeat="option in options">
+              <h5 ng-click='addColor(option)'>{{option}}</h5>
+          </li>
+        </ul>
         <label class='option'><input type="radio" ng-model="color" value="authoritative"  ng-click='addColor(value)'>authoritative</label>
-        <label class='option'><input type="radio" ng-model="color" value="energetic"  ng-click='addColor(value)'>energetic</label>
+        <!--<label class='option'><input type="radio" ng-model="color" value="energetic"  ng-click='addColor(value)'>energetic</label>
         <label class='option'><input type="radio" ng-model="color" value="elegant" ng-click='addColor(value)'>elegant</label>
         <label class='option'><input type="radio" ng-model="color" value="expensive" ng-click='addColor(value)'>expensive</label>
         <label class='option'><input type="radio" ng-model="color" value="delicious" ng-click='addColor(value)'>delicious</label>
@@ -43,7 +50,7 @@
         <label class='option'><input type="radio" ng-model="color" value="comfort" ng-click='addColor(value)'>comfort</label>
         <label class='option'><input type="radio" ng-model="color" value="fresh" ng-click='addColor(value)'>fresh</label>
         <label class='option'><input type="radio" ng-model="color" value="natural" ng-click='addColor(value)'>natural</label>
-        <label class='option'><input type="radio" ng-model="color" value="refreshing" ng-click='addColor(value)'>refreshing</label>
+        <label class='option'><input type="radio" ng-model="color" value="refreshing" ng-click='addColor(value)'>refreshing</label>-->
       </div>
     </div>
     <div class="colorContainer">

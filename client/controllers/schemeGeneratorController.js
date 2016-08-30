@@ -25,7 +25,8 @@ angular.module('colorPsych.controllers', [])
 
  $scope.submitColors = function(){
   $scope.clear();
-    ChooseColors.submit($scope.colors)
+  console.log($scope.chosen);
+    ChooseColors.submit($scope.chosen)
       .then(function(object){
         console.log("submit colors received", object.data);
         $scope.makeColorDiv(object.data.colors);

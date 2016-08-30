@@ -11,26 +11,16 @@ angular.module('colorPsych.controllers', [])
   $scope.color = "";
   $scope.scheme = false;
   $scope.canvas;
-  $scope.addColor = function(color){
-    if (color){
-      console.log("yo I'm adding", color, 'colors:',  $scope.colors);
+  $scope.addColor = function(color, index){
+    if ($scope.chosen.length < 4) {
+      $scope.chosen.push(color);
+      $scope.options.splice(index, 1);
     }
-    if ($scope.colors.length < 4){
-      if($scope.color.length > 1){
-        console.log("entered if block");
-        $scope.colors.push($scope.color);
-        console.log($scope.colors);
-      }
-    }
-    if ($scope.colors.length === 4){
-      $scope.submitColors();
-      $scope.display = "You chose " + $scope.colors.toString();
-      $scope.colors = [];
-    }
-    if ($scope.colors.length === 1){
-      console.log('scope colors length', $scope.colors.length);
-      $scope.clear();
-    }
+  }
+  $scope.removeColor = function (color, index) {
+    console.log("in remove color", color);
+    $scope.options.push(color);
+    $scope.chosen.splice(index, 1);
   }
 
  $scope.submitColors = function(){

@@ -127,7 +127,6 @@ app.get('/scheme', function(req, res){
 //*************************************************************************
 
 app.post('/', function(req, res){
-  console.log("In post request", req.body);
   var colorArray = req.body;
   res.sendStatus(201);
 
@@ -146,15 +145,11 @@ app.post('/', function(req, res){
   returnColors = [];
 
   Scheme.findOne({ colors: returnColors }, function(err, found){
-    console.log("hello?", returnColors)
     if (err){
-      console.log("what?");
-      console.log("Err", err);
+      throw err;
     } else {
-      console.log("Scheme not found!");
       Scheme.create({ colors: returnColors, created_at : new Date() }, function(err, scheme){
         if (!err){
-          console.log("Scheme created! ", scheme);
         }
       })
     }

@@ -18,7 +18,6 @@ angular.module('colorPsych.controllers', [])
     }
   }
   $scope.removeColor = function (color, index) {
-    console.log("in remove color", color);
     $scope.options.push(color);
     $scope.chosen.splice(index, 1);
   }
@@ -28,7 +27,6 @@ angular.module('colorPsych.controllers', [])
   console.log($scope.chosen);
     ChooseColors.submit($scope.chosen)
       .then(function(object){
-        console.log("submit colors received", object.data);
         $scope.makeColorDiv(object.data.colors);
     });
   }
@@ -56,6 +54,12 @@ angular.module('colorPsych.controllers', [])
   $scope.clear = function(){
     angular.element('.colorContainer').html('<canvas id="colors"></canvas>');
     angular.element('.labels').html('');
+  }
+  $scope.clearColors = function() {
+    $scope.chosen.forEach(function(color){
+      $scope.options.push(color);
+    });
+    $scope.chosen = [];
   }
   $scope.save = function(){
     console.log('save clicked');

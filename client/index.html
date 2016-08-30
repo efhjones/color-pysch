@@ -20,24 +20,37 @@
         <h2>scheme generator</h2>
       </center>
     </div>
-    <div class="options">
       <center>
         <h3>Choose 4 traits</h3>
       </center>
       <div ng-controller='schemeGeneratorController' class="selections">
         <div class='options'>
-          <div ng-repeat="option in options track by $index">
-              <h5 ng-click='addColor(option, $index)'>{{option}}</h5>
+          <div 
+            class='option' 
+            ng-repeat="option in options track by $index" 
+            ng-click='addColor(option, $index)'
+            >{{option}}
           </div>
         </div>
-        <div class='chosen'>Moods:
-          <div ng-repeat="choice in chosen track by $index" ng-click="removeColor(choice, $index)">
-          {{choice}}
+        <div class='chosen'>
+          <div class='choice' 
+            ng-repeat="choice in chosen track by $index" 
+            ng-click="removeColor(choice, $index)"
+            >{{choice}}
           </div>
+        </div>
+        <button 
+          class='btn submit' 
+          ng-click="submitColors(chosen)"
+          >Submit
+        </button>
+
+         <button 
+            class='btn submit' 
+            ng-click="clearColors()"
+            >Clear
+          </button>
       </div>
-      <button class='btn submit' ng-click="submitColors(chosen)">Submit</button>
-      <button class='btn submit' ng-click="clearColors()">Clear</button>
-    </div>
     <div class="colorContainer">
       <canvas id="colors"></canvas>
     </div>

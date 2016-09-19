@@ -5,20 +5,19 @@
     <title>Color Psychology Scheme Generator</title>
     <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="./fa.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type='text/javascript' src='./lib/bower_components/jquery/dist/jquery.js'></script>
     <script type='text/javascript' src='./lib/bower_components/angular/angular.js'></script>
+    <script type='text/javascript' src="./lib/bower_components/angular-route/angular-route.js"></script>
     <script src='controllers/schemeGeneratorController.js'></script>
     <script src='services/schemeGeneratorFactory.js'></script>
     <script src='app.js'></script>
   </head>
   <body ng-app='colorPsych' ng-controller='schemeGeneratorController'>
     <div class='header'>
-      <center>
-        <h1>Color Psych<i class='fa fa-search' style='font-size:50px'></i>logy</h1>
-        <h2>scheme generator</h2>
-      </center>
+      <h1>Color Psych<i class='fa fa-search' style='font-size:50px'></i>logy</h1>
+      <h2>scheme generator</h2>
     </div>
       <center>
         <h3>Choose 4 traits</h3>
@@ -26,34 +25,36 @@
       <div ng-controller='schemeGeneratorController' class="selections">
         <div class='options'>
           <div 
-            class='option' 
+            class='option fa fa-check check' 
             ng-repeat="option in options track by $index" 
             ng-click='addColor(option, $index)'
-            >{{option}}
+            ><span class='roboto'>{{option}}</span>
           </div>
         </div>
         <div class='chosen'>
-          <div class='choice' 
+          <div class='choice fa fa-times'
             ng-repeat="choice in chosen track by $index" 
             ng-click="removeColor(choice, $index)"
-            >{{choice}}
+            ><span class='roboto'>{{choice}}</span>
           </div>
         </div>
-        <button 
-          class='btn submit' 
-          ng-click="submitColors(chosen)"
-          >Submit
-        </button>
-
-         <button 
+        <div class='buttons'>
+          <button 
             class='btn submit' 
             ng-click="clearColors()"
             >Clear
           </button>
+          <button 
+            class='btn submit' 
+            ng-click="submitColors(chosen)"
+            >Generate
+          </button>
+        </div>
       </div>
     <div class="colorContainer">
       <canvas id="colors"></canvas>
     </div>
       <div class="labels"></div>
+      <button ng-show="showSave" class="submit" ng-click="save()">Save</button>
   </body>
 </html>

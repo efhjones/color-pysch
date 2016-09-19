@@ -13,7 +13,7 @@ var colors = {
   festive : ['#e7447d', '#872b90', '#f3ebd4', '#f3ebd4', '#f3ebd4', '#f3ebd4', '#f3ebd4'],
   gentle : ['#dda4ad', '#a1d5c9', '#dc97a9', '#f2cb7c', '#edaf88', '#edaf88', '#c6e8e7', '#8eb9a8', '#fefbd0', '#fdcfb7', '#f4828c', '#775d6a'],
   nostalgic : ['#dda4ad', '#c13f99', '#4f5885', '#7889a0', '#97a9af', '#c4d0bb', '#e9eac5', '#e8ddac', '#c1af91'],
-  romatic : ['#f7b6cc', '#c13f99', '#ed6f9d', '#f4d3e4', '#ecf7f1', '#eae2d6', '#8d7b8b', '#efcad1', '#b7cad1', '#526827', '#e45276', '#bca9bc', '#cad9e0', '#54324b', '#f0aa91', '#0e0001', '#fbafb9', '#454551'],
+  romantic : ['#f7b6cc', '#c13f99', '#ed6f9d', '#f4d3e4', '#ecf7f1', '#eae2d6', '#8d7b8b', '#efcad1', '#b7cad1', '#526827', '#e45276', '#bca9bc', '#cad9e0', '#54324b', '#f0aa91', '#0e0001', '#fbafb9', '#454551'],
   fun : ['#f26e26', '#872b90', '#484266', '#d0ef7a', '#d0ef7a', '#53e4ff', '#ffd573', '#ff6766', '#ff6766', '#ff6766', ],
   traditional : ['#5e4445', '#7b212d', '#212c6a', '#8c8e8d', '#58585a', '#010101', '#5e4445', '#7b212d', '#212c6a', '#8c8e8d', '#58585a', '#010101'],
   happy : ['#f3df6c', '#f8dd6a', '#b1b3e3', '#f6f5b2', '#e74b70', '#cee74b', '#6c3672', '#ba2ca2', '#e94b98', '#c03520', '#bd2325', '#c0d8d8', '#8376a4', '#e9ff39', '#8cff1f', '#00c6cc', '#f08ed3', '#ab8ee5'],

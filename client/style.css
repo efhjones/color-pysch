@@ -1,21 +1,35 @@
-div {
-  border: 1px solid white;
-}
+
 h1 {
   font-family: 'Slabo 27px', serif;
-  font-size: 5em;
-  margin: 0 auto;
+  font-size: 2em;
+  margin: 0;
 }
 
 h2 {
   font-family: 'Slabo 27px', serif;
   font-size: 3em;
   margin: 0 auto;
-
 }
+
+h3 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 1.5em;
+  margin: 0 auto;
+}
+
 .header {
   margin: 0 auto;
   width: 100%;
+}
+
+.choice {
+  width: 25%;
+  display: block;
+  float: left;
+  text-align: center;
+  margin: 10px;
+  cursor: pointer;
+  padding: 3px;
 }
 
 .clear {
@@ -24,25 +38,39 @@ h2 {
 }
 
 .colorContainer {
-  width: 45%
+  width: 100%;
   height: 50%;
 }
 
 #colors {
-  width: 45%;
-  height: 300px;
-  display: inline;
-  float: right;
   padding: 20px;
+  width: 100%;
 }
-
+.chosen {
+  font-family: 'Roboto', sans-serif;
+  width: 40%;
+  float: right;
+  height: 20em;
+}
 .color{
   display: inline;
+}
+
+.fa {
+  display: inline;
+  padding: 1px;
+}
+
+.fa:hover {
+  display: inline;
+  padding: 1px;
+  color: darkgray;
 }
 
 .labels {
   width: 45%;
   float: right;
+  position: absolute;
 }
 
 .label {
@@ -52,20 +80,26 @@ h2 {
 
 }
 
-.options {
-  font-family: 'Roboto';
-  width: 45%;
-  display: inline;
-  float: left;
-}
-
 .option {
   width: 25%;
   display: block;
   float: left;
   margin: 10px;
+  cursor: pointer;
+  padding: 1px;
 }
 
+.options {
+  font-family: 'Roboto';
+  width: 40%;
+  float: left;
+  height: 20em;
+}
+
+.roboto {
+  font-family: 'Roboto', sans-serif;  
+  padding: 1px;
+ }
 .submit {
   font-family: 'Slabo 27px';
   font-size: 2em;
@@ -74,6 +108,9 @@ h2 {
   border-radius: 10px;
   width: 80%;
   margin: auto 0;
+  width: 50%;
+  margin: 0 auto;
+  float: left;
 }
 
 

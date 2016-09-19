@@ -122,12 +122,16 @@ app.get('/scheme', function(req, res){
   })
 });
 
+app.get('/colors', function(req, res){
+  console.log('colors request', colors);
+  res.send(200, Object.keys(colors));
+})
+
 //*************************************************************************
 //      POST REQUEST --> CHOOSES COLORS, CREATES SCHEMA MODEL
 //*************************************************************************
 
 app.post('/', function(req, res){
-  console.log("Spongebob");
   var colorArray = req.body;
   res.sendStatus(201);
 
@@ -137,11 +141,7 @@ app.post('/', function(req, res){
         console.log("Err", err);
       }
       if (found){
-        console.log('WTF', found.colors);
-        console.log("helooo");
-
         var index = randomIndex(found.colors);
-        console.log("chose index", index);
         returnColors.push(found.colors[index]);
       }
     });
@@ -150,15 +150,11 @@ app.post('/', function(req, res){
   returnColors = [];
 
   Scheme.findOne({ colors: returnColors }, function(err, found){
-    console.log("Hello")
     if (err){
-      console.log("Err", err);
-    }
-    if (!found){
-      console.log("Scheme not found!");
+      throw err;
+    } else {
       Scheme.create({ colors: returnColors, created_at : new Date() }, function(err, scheme){
         if (!err){
-          console.log("Scheme created! ", scheme);
         }
       })
     }

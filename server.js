@@ -122,6 +122,11 @@ app.get('/scheme', function(req, res){
   })
 });
 
+app.get('/colors', function(req, res){
+  console.log('colors request', colors);
+  res.send(200, Object.keys(colors));
+})
+
 //*************************************************************************
 //      POST REQUEST --> CHOOSES COLORS, CREATES SCHEMA MODEL
 //*************************************************************************

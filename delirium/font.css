@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'DELIRIUMNCV';
+  src: url('DELIRIUMNCV.woff') format('woff'),
+       url('DELIRIUMNCV.ttf') format('truetype'),
+       url('DELIRIUMNCV.svg#DELIRIUMNCV') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FTY DELIRIUM NCV';
+  src: url('FTY DELIRIUM NCV.eot');
+  src: url('FTY DELIRIUM NCV.woff2') format('woff2'),
+       url('FTY DELIRIUM NCV.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

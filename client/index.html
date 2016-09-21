@@ -16,45 +16,58 @@
   </head>
   <body ng-app='colorPsych' ng-controller='schemeGeneratorController'>
     <div class='header'>
-      <h1>Color Psych<i class='fa fa-search' style='font-size:50px'></i>logy</h1>
-      <h2>scheme generator</h2>
+      <h1 class='color_psychology'>
+        <span style="color: #82e77a">C</span>
+        <span style="color: #00a9dc">o</span>
+        <span style="color: #ffff00">l</span>
+        <span style="color: #ec008c">o</span>
+        <span style="color: #0000ff">r &nbsp;&nbsp;&nbsp;</span>
+        <span style="color: #82e77a">P</span>
+        <span style="color: #00a9dc">s</span>
+        <span style="color: #ffff00">y</span>
+        <span style="color: #ec008c">c</span>
+        <span style="color: #82e77a">h</span>
+        <span style="color: #00a9dc">o</span>
+        <span style="color: #ffff00">l</span>
+        <span style="color: #ec008c">o</span>
+        <span style="color: #0000ff">g</span>
+        <span style="color: #82e77a">y</span></h1>
     </div>
-      <center>
-        <h3>Choose 4 traits</h3>
-      </center>
-      <div ng-controller='schemeGeneratorController' class="selections">
-        <div class='options'>
-          <div 
-            class='option fa fa-check check' 
-            ng-repeat="option in options track by $index" 
-            ng-click='addColor(option, $index)'
-            ><span class='roboto'>{{option}}</span>
-          </div>
-        </div>
-        <div class='chosen'>
-          <div class='choice fa fa-times'
-            ng-repeat="choice in chosen track by $index" 
-            ng-click="removeColor(choice, $index)"
-            ><span class='roboto'>{{choice}}</span>
-          </div>
-        </div>
-        <div class='buttons'>
-          <button 
-            class='btn submit' 
-            ng-click="clearColors()"
-            >Clear
-          </button>
-          <button 
-            class='btn submit' 
-            ng-click="submitColors(chosen)"
-            >Generate
-          </button>
+    <img class='logo' src='./logo.png'/>
+    <h3 class='choose4traits'>Choose 4 traits</h3>
+    <div ng-controller='schemeGeneratorController' class="selections">
+      <div class='options'>
+        <div 
+          class='option fa fa-check check' 
+          ng-repeat="option in options track by $index" 
+          ng-click='addColor(option, $index)'
+          ><span class='roboto'>{{option}}</span>
         </div>
       </div>
-    <div class="colorContainer">
-      <canvas id="colors"></canvas>
+      <div class='chosen'>
+        <div class='choice fa fa-times'
+          ng-repeat="choice in chosen track by $index" 
+          ng-click="removeColor(choice, $index)"
+          ><span class='roboto'>{{choice}}</span>
+        </div>
+      </div>
+      <div class='buttons'>
+        <button 
+          class='btn submit' 
+          ng-click="clearColors()"
+          >Clear
+        </button>
+        <button 
+          class='btn submit' 
+          ng-click="submitColors(chosen)"
+          >Generate
+        </button>
+      </div>
     </div>
-      <div class="labels"></div>
-      <button ng-show="showSave" class="submit" ng-click="save()">Save</button>
+  <div class="colorContainer">
+    <canvas id="colors"></canvas>
+  </div>
+    <div class="labels"></div>
+    <button ng-show="showSave" class="submit" ng-click="save()">Save</button>
   </body>
 </html>
